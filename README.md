@@ -6,6 +6,15 @@ This version features a **100% dynamic, backend-calculated real-time analytics e
 
 ---
 
+## Quick Start & Local Endpoints
+
+After launching the Docker environment, you can access the application layers directly:
+*   **Web Dashboard Portal:** [http://localhost:8080](http://localhost:8080)
+*   **Analytics REST API:** [http://localhost:8000](http://localhost:8000)
+*   **API Interactive Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
 ## Architecture & Directory Layout
 
 The project structure is organized into decoupled services:
@@ -13,16 +22,13 @@ The project structure is organized into decoupled services:
 ```text
 route-resilience/
 │
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml             # Automated testing and linting validation
-│
 ├── backend/
 │   ├── src/
 │   │   ├── main.py               # REST API entrypoint (FastAPI)
 │   │   ├── inference.py          # Real-time GTE Tensor Mask & skeletonization pipeline
 │   │   └── graph_engine.py       # Live NetworkX topology, routing & resilience analytics
 │   ├── Requirements.txt          # Modern PyTorch/Skimage dependency stack
+│   ├── .dockerignore             # Excludes weights/caches from build context transfer
 │   └── Dockerfile                # GPU/CPU PyTorch backend image
 │
 ├── frontend/
@@ -33,6 +39,7 @@ route-resilience/
 │   │       ├── style.css
 │   │       └── app.js
 │   ├── Requirements.txt          # Frontend serving dependencies
+│   ├── .dockerignore             # Excludes local assets from build context transfer
 │   └── Dockerfile                # Frontend container with sync startup check
 │
 ├── data/                         # Host folder containing weights and raster tiles
